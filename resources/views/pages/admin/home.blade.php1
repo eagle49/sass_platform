@@ -1,0 +1,78 @@
+@extends('layouts.app')
+
+@section('template_title')
+    Welcome {{ Auth::user()->name }}
+@endsection
+
+@section('head')
+@endsection
+
+@section('content')
+    <div class="container">
+        <div class="row">
+        	<div class="col-3" id="mySidenav">
+        			{{-- Left Side Of Navbar --}}
+        			<div id="m_ver_menu" class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " m-menu-vertical="1" m-menu-scrollable="0" m-menu-dropdown-timeout="500">
+            <ul class="navbar-nav mr-auto m-menu__nav">
+                @role('admin')
+                    <li class="nav-item dropdown m-menu__section m-menu__section--first">
+                        <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {!! trans('titles.adminDropdownNav') !!}
+                        </a> -->
+                        <!-- <div class="dropdown-menu"> -->
+
+                            <a class="m-menu__link dropdown-item {{ Request::is('users', 'users/' . Auth::user()->id, 'users/' . Auth::user()->id . '/edit') ? 'active' : null }}" href="{{ url('/users') }}"> 
+                            <span class="m-menu__item-here"></span> <i class="m-menu__link-icon flaticon-layers"></i>
+                                <span class="m-menu__link-text">{!! trans('titles.adminUserList') !!}</span>
+                            </a>
+                    </li>
+                    <li class="nav-item dropdown m-menu__section m-menu__section--first">        
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item {{ Request::is('users/create') ? 'active' : null }}" href="{{ url('/users/create') }}">
+                                <span class="m-menu__link-text">{!! trans('titles.adminNewUser') !!}</span>
+                            </a>
+                    </li>
+                    <!-- <li class="nav-item dropdown m-menu__section m-menu__section--first">        
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item {{ Request::is('themes','themes/create') ? 'active' : null }}" href="{{ url('/themes') }}">
+                                <span class="m-menu__link-text">{!! trans('titles.adminThemesList') !!}</span>
+                            </a>
+                    </li> -->
+                    <li class="nav-item dropdown m-menu__section m-menu__section--first">        
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item {{ Request::is('logs') ? 'active' : null }}" href="{{ url('/logs') }}">
+                                <span class="m-menu__link-text">{!! trans('titles.adminLogs') !!}</span>
+                            </a>
+                    </li>
+                   <!--  <li class="nav-item dropdown m-menu__section m-menu__section--first">        
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item {{ Request::is('phpinfo') ? 'active' : null }}" href="{{ url('/phpinfo') }}">
+                                <span class="m-menu__link-text">{!! trans('titles.adminPHP') !!}</span>
+                            </a>
+                    </li>
+                    <li class="nav-item dropdown m-menu__section m-menu__section--first">        
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item {{ Request::is('routes') ? 'active' : null }}" href="{{ url('/routes') }}">
+                                <span class="m-menu__link-text">{!! trans('titles.adminRoutes') !!}</span>
+                            </a>
+                    </li>
+                    <li class="nav-item dropdown m-menu__section m-menu__section--first">        
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item {{ Request::is('active-users') ? 'active' : null }}" href="{{ url('/active-users') }}">
+                                <span class="m-menu__link-text">{!! trans('titles.activeUsers') !!}</span>
+                            </a>
+  
+                    </li> -->
+                @endrole
+            </ul>
+        	</div></div>
+            <div class="col-2"></div>
+            <div class="col-9">
+
+                @include('panels.welcome-panel')
+
+            </div>
+        </div>
+    </div>
+
+@endsection
